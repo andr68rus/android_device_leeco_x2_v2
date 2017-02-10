@@ -368,6 +368,8 @@ framework/embmslibrary.jar
 framework/qti-telephony-common.jar|97d23b52db3773005e51eac7b9df1701c99a416c
 framework/QtiTelephonyServicelibrary.jar
 lib64/libparam.so
+lib/libril.so
+lib64/libril.so
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 vendor/bin/qti
 vendor/lib64/libconfigdb.so

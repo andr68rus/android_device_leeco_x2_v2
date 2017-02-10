@@ -26,6 +26,10 @@
 # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 #
+import init.qcom.ims.rc
+
+on init
+    export LD_SHIM_LIBS /system/vendor/lib64/lib-imsdpl.so|libshim_boringssl.so
 
 on early-init
     mkdir /firmware 0771 system system
@@ -239,19 +243,6 @@ service audiod /system/bin/audiod
    user system
    group system
 
-service imsqmidaemon /system/bin/imsqmidaemon
-    class main
-    user system
-    socket ims_qmid stream 0660 system radio
-    group radio net_raw log diag
-
-service imsdatadaemon /system/bin/imsdatadaemon
-    class main
-    user system
-    socket ims_datad stream 0660 system radio
-    group system wifi radio inet net_raw log diag net_admin
-    disabled
-
 service pd_mapper /system/vendor/bin/pd-mapper
      class core
      disabled
@@ -262,26 +253,6 @@ on property:persist.sys.pd_enable=1
 
 on property:persist.sys.pd_enable=0
      write /sys/class/service_locator/service_locator_status 0
-
-on property:sys.ims.QMI_DAEMON_STATUS=1
-    start imsdatadaemon
-
-service ims_rtp_daemon /system/bin/ims_rtp_daemon
-   class main
-   user system
-   socket ims_rtpd stream 0660 system radio
-   group radio net_raw diag inet log
-   disabled
-
-service imscmservice /system/bin/imscmservice
-   class main
-   user system
-   group radio net_raw diag diag log
-   disabled
-
-on property:sys.ims.DATA_DAEMON_STATUS=1
-   start ims_rtp_daemon
-   start imscmservice
 
 service dts_configurator /system/bin/dts_configurator
     class late_start

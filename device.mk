@@ -94,11 +94,13 @@ PRODUCT_CHARACTERISTICS := nosdcard
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp
+    persist.sys.usb.config=mtp \
 
 ifeq ($(TARGET_BUILD_VARIANT),eng)
 # Disable ADB authentication
-ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=0
+ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=0 \
+    ro.allow.mock.location=0 \
+    ro.secure=0
 endif
 
 # Alipay / WeChat
@@ -175,8 +177,8 @@ PRODUCT_PACKAGES += \
     fingerprintd
 
 # Gello
-PRODUCT_PACKAGES += \
-    Gello
+#PRODUCT_PACKAGES += \
+#    Gello
 
 # GPS
 PRODUCT_PACKAGES += \
@@ -238,7 +240,7 @@ PRODUCT_PACKAGES += \
     libOmxQcelp13Enc \
     libOmxVdec \
     libOmxVenc \
-    libstagefrighthw
+    libstagefrighthw \
 
 # Power
 PRODUCT_PACKAGES += \
@@ -306,6 +308,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini \
     $(LOCAL_PATH)/wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/qca_cld/WCNSS_cfg.dat
+
+# Remove packages that do not work well
+PRODUCT_PACKAGES += \
+    RemovePackages
 
 # Dalvik and hwui configs
 $(call inherit-product, frameworks/native/build/phone-xxxhdpi-4096-dalvik-heap.mk)
