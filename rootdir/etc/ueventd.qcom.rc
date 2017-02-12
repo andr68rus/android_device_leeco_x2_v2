@@ -248,8 +248,5 @@
 # misc permissions for force upgrade
 /dev/block/sda4 0660 system system
 
-#add for frp
-/dev/block/platform/soc/624000.ufshc/by-name/frp   0660   system    system
-
 # Add device block for FRP
-/dev/block/bootdevice/by-name/config    0660   system     system
+/dev/block/bootdevice/by-name/frp    0660   system     system
