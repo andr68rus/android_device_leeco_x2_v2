@@ -21,9 +21,15 @@
 #
 
 $(call inherit-product-if-exists, vendor/leeco/x2/x2-vendor.mk)
+$(call inherit-product, frameworks/native/build/phone-xxxhdpi-3072-dalvik-heap.mk)
+$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
+
+# Ramdisk
+PRODUCT_COPY_FILES += \
+    $(call find-copy-subdir-files,*,device/leeco/x2/rootdir/root,root)
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -58,7 +64,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.software.midi.xml:system/etc/permissions/android.software.midi.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
-    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
+    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+    $(LOCAL_PATH)/configs/imscm.xml:system/etc/permissions/imscm.xml
 
 # Device uses high-density artwork where available
 PRODUCT_AAPT_CONFIG := normal
@@ -102,10 +109,6 @@ ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=0 \
     ro.allow.mock.location=0 \
     ro.secure=0
 endif
-
-# Alipay / WeChat
-PRODUCT_BOOT_JARS += \
-    org.ifaa.android.manager
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -231,6 +234,7 @@ PRODUCT_COPY_FILES += \
 
 # OMX
 PRODUCT_PACKAGES += \
+    libmm-omxcore \
     libc2dcolorconvert \
     libextmedia_jni \
     libOmxAacEnc \
@@ -240,7 +244,7 @@ PRODUCT_PACKAGES += \
     libOmxQcelp13Enc \
     libOmxVdec \
     libOmxVenc \
-    libstagefrighthw \
+    libstagefrighthw
 
 # Power
 PRODUCT_PACKAGES += \
@@ -249,19 +253,6 @@ PRODUCT_PACKAGES += \
 # QMI
 PRODUCT_PACKAGES += \
     libjson
-
-# Ramdisk
-PRODUCT_PACKAGES += \
-    fstab.qcom \
-    init.qcom.bt.sh \
-    init.qcom.power.rc \
-    qfp_boot.sh \
-    init.qcom.rc \
-    init.qcom.sh \
-    init.qcom.usb.rc \
-    init.qcom.usb.sh \
-    init.target.rc \
-    ueventd.qcom.rc
 
 # Display xml
 PRODUCT_PACKAGES += \
@@ -278,7 +269,9 @@ PRODUCT_PACKAGES += \
 # RIL
 PRODUCT_PACKAGES += \
     librmnetctl \
-    libxml2
+    rmnetcli \
+    libxml2 \
+    libprotobuf-cpp-full
 
 # Sensors
 PRODUCT_PACKAGES += \
