@@ -70,6 +70,8 @@ persist.camera.imglib.fddsp=1
 persist.camera.llc=1
 persist.camera.llnoise=1
 camera.hal1.packagelist=com.skype.raider,com.tencent.mm
+persist.camera.stats.test=5
+camera.lowpower.record.enable=1
 persist.camera.HAL3.enabled=0
 
 # CNE
