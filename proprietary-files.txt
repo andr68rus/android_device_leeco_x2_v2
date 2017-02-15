@@ -1,5 +1,7 @@
 # Audio
 etc/firmware/tfa98xx.cnt
+lib/hw/audio.primary.msm8996.so
+lib64/hw/audio.primary.msm8996.so
 vendor/etc/audio_output_policy_letv.conf
 
 # Audio ACDB
@@ -59,6 +61,7 @@ lib/libarcsoft_smart_denoise.so
 lib/libBD_asr_model_cmn-Hans-CN_v1_camera.so
 lib/libcamera_letv_algo.so
 lib/libcameraservice.so
+lib64/libcameraservice.so
 lib/libLetvCameraImageSDK.so
 lib/libmm-qcamera.so
 lib/libmmcamera_interface.so
@@ -528,7 +531,6 @@ etc/firmware/widevine.b05
 etc/firmware/widevine.b06
 etc/firmware/widevine.mbn
 etc/firmware/widevine.mdt
-etc/firmware/wlan/qca_cld/WCNSS_cfg.dat
 
 # Other binaries
 bin/hvdcp_opti
